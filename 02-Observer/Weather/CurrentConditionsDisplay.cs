@@ -1,4 +1,6 @@
+
 using System;
+using System.Linq;
 
 namespace _02_Observer.Weather
 {
@@ -23,7 +25,9 @@ namespace _02_Observer.Weather
         {
             this._Temperature = temp;
             this._Humidity = humidity;
+
             this.Display();
         }
     }
+
 }

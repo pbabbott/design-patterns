@@ -11,39 +11,9 @@ namespace _02_Observer.Weather
         private decimal _Humidity;
         private decimal _Pressure;
 
-
         public WeatherData()
         {
             this._Observers = new List<IObserver>();
-        }
-
-
-        public void MeasurementsChanged()
-        {
-            var temp = GetTemperature();
-            var humidity = GetHumidity();
-            var pressure = GetPressure();
-
-            // The display types here are the thing that changes
-            // They are not currently encapsulated
-            // currentConditionsDisplay.update(temp, humidity, pressure);
-            // statisticsDisplay.update(temp, humidity, pressure);
-            // forecastDisplay.update(temp, humidity, pressure);
-        }
-
-        private decimal GetPressure()
-        {
-            throw new NotImplementedException();
-        }
-
-        private decimal GetHumidity()
-        {
-            throw new NotImplementedException();
-        }
-
-        private decimal GetTemperature()
-        {
-            throw new NotImplementedException();
         }
 
         public void RegisterObserver(IObserver o)
@@ -66,5 +36,29 @@ namespace _02_Observer.Weather
                 o.Update(_Temperature, _Humidity, _Pressure);
             }
         }
+
+        public void MeasurementsChanged()
+        {
+            // The display types here are the thing that changes
+            // They are not currently encapsulated
+            // currentConditionsDisplay.update(temp, humidity, pressure);
+            // statisticsDisplay.update(temp, humidity, pressure);
+            // forecastDisplay.update(temp, humidity, pressure);
+
+            // now the change is encapsulated
+            this.NotifyObservers();
+
+        }
+
+        public void SetMeasurements(decimal temperature, decimal humidity, decimal pressure)
+        {
+            this._Temperature = temperature;
+            this._Humidity = humidity;
+            this._Pressure = pressure;
+
+            this.MeasurementsChanged();
+        }
+
+
     }
 }
